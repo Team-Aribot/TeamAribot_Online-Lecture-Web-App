@@ -1,0 +1,22 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 2px solid var(--border-color);
+
+  & input {
+    width: 60%;
+    padding: 10px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+  }
+
+  & input:focus {
+    outline: 0;
+  }
+
+  & li:not(:last-of-type) {
+    margin-right: 10px;
+  }
+}

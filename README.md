@@ -10,6 +10,5 @@
   - [x] scss
   - [ ] img
   - [ ] video
-  - [ ] hot
 
 ## Back-End: Spring Boot/Maria DB/AWS S3

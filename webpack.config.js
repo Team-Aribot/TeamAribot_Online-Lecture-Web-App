@@ -1,10 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: './ts/index.js',
+  mode: 'none',
+  entry: './src/index.ts',
   output: {
-    filename: 'bundle.js',
+    filename: 'index.js',
     path: path.resolve(__dirname, './dist')
   },
   module: {
@@ -12,22 +14,32 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          'style-loader', 'css-loader', 'sass-loader'
+          { loader: MiniCssExtractPlugin.loader },
+          'css-loader', 'sass-loader'
         ]
       },
       {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env']
-          }
-        }
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env']
+            }
+          },
+          'ts-loader'
+        ]
       }
     ]
   },
   plugins: [
-    new webpack.ProgressPlugin()
-  ]
+    new webpack.ProgressPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'styles.css'
+    })
+  ],
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+  }
 }
